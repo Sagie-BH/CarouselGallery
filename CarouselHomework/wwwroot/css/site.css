@@ -69,3 +69,23 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+.create-area {
+    text-align: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+}
+.create-btn {
+    float: right;
+    border: 1px solid black;
+    border-radius: 5px;
+    box-shadow: 1px 1px 2px;
+}
+.custom-file {
+    border: 1px solid black;
+    border-radius: 5px;
+    box-shadow: 1px 1px 2px;
+}
+.input-lbl {
+    transform: translateY(7px);
+    font-weight: 500;
+}

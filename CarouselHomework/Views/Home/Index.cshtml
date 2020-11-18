@@ -1,5 +1,4 @@
 ﻿@model CarouselViewModel
-
 <!--Gallery Carousel-->
 <div id="my-carousel" class="carousel slide carousel-fade" data-ride="carousel" data-interval="1000">
     <ol class="carousel-indicators">
@@ -36,19 +35,21 @@
 <!-- Add New Image-->
 <hr />
 <div class="container-fluid">
-    <div class="row">
-        <form method="post" asp-action="CreateImage" enctype="multipart/form-data" class="row">
+    <div class="row create-area">
+        <form method="post" asp-action="CreateImage" enctype="multipart/form-data" class="row create-area img-input-area">
+            <label asp-for="ImageViewModel.Title" class="input-lbl"></label>
             <div class="form-group col-3">
-                <input asp-for="ImageViewModel.Title" class="form-control" value="Choose Title" />
+                <input asp-for="ImageViewModel.Title" class="form-control custom-file" placeholder="Title" />
                 <span asp-validation-for="ImageViewModel.Title" class="text-danger"></span>
             </div>
+            <label class="input-lbl">Image:</label>
             <div class="form-group col-6">
                 <div class="custom-file">
                     <input class="custom-file-input" asp-for="ImageViewModel.UploadedImage" />
                 </div>
             </div>
             <div class="form-group col-3">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-primary create-btn" />
             </div>
         </form>
     </div>
@@ -83,7 +84,7 @@
                     @Html.DisplayFor(modelItem => item.Size)
                 </td>
                 <td>
-                    <a href="/Home/Delete/1">Delete</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                 </td>
             </tr>
         }

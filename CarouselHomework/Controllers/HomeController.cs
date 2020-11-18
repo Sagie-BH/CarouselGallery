@@ -28,12 +28,7 @@ namespace CarouselHomework.Controllers
 
         public IActionResult Index()
         {
-            CarouselViewModel vm = new CarouselViewModel
-            {
-                ImagesUrls = GetLocalImages(),
-                ImageModelList = repository.GetAll()
-            };
-            return View(vm);
+            return View(GetCurrentVM());
         }
 
 
@@ -79,7 +74,14 @@ namespace CarouselHomework.Controllers
             }
             return NotFound();
         }
-
+        private CarouselViewModel GetCurrentVM()
+        {
+            return new CarouselViewModel
+            {
+                ImagesUrls = GetLocalImages(),
+                ImageModelList = repository.GetAll()
+            };
+        }
 
         private string GetFileSize(long bytes)
         {
@@ -97,7 +99,6 @@ namespace CarouselHomework.Controllers
             return string.Format("{0:n1}{1}", number, suffixes[counter]);
         }
 
-        [HttpPost]
         public async Task<ActionResult> Delete(int id)
         {
             var imgModel = repository.GetById(id);
@@ -108,7 +109,7 @@ namespace CarouselHomework.Controllers
             repository.Remove(id);
             if (await repository.SaveChanges())
             {
-                return View("Index");
+                return View("Index", GetCurrentVM());
             }
             return BadRequest("Remove Failed");
         }
